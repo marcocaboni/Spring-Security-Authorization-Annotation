@@ -1,0 +1,5 @@
+h1. Spring Security Authentication Annotation 
+
+A small project showing how to use annotations to make easier testing method secured with Spring Security.
+
+See  the blog post "Testing methods secured with Spring Security":http://sinossisoftware.blogspot.com/2011/07/testing-methods-secured-with-spring.html for more information.
