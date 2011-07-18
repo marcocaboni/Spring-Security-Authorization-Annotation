@@ -73,4 +73,13 @@ public class AuthenticationListenerTest
 		Assert.assertTrue(authentication.getAuthorities().isEmpty());
 	}
 
+	@Test
+	@Authenticate(roles = {"CIAO" })
+	public void testMissingUsername()
+	{
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		Assert.assertNotNull(authentication);
+		Assert.assertEquals(authentication.getPrincipal(), AuthenticationListener.DEFAULT_USERNAME);
+	}
+
 }

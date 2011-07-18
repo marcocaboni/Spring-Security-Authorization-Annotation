@@ -20,7 +20,7 @@ import java.lang.annotation.Target;
 @Documented
 public @interface Authenticate {
 
-	String username();
+	String username() default "";
 
 	String[] roles() default {};
 }

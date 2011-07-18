@@ -25,6 +25,10 @@ import org.testng.ITestResult;
 public class AuthenticationListener implements IInvokedMethodListener
 {
 
+	public static final String DEFAULT_USERNAME = "default";
+
+	private static final String FAKE_PASSWORD = "fakePassword";
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -39,9 +43,9 @@ public class AuthenticationListener implements IInvokedMethodListener
 			if (userAnnotation != null)
 			{
 				String username = userAnnotation.username();
-				if (username.isEmpty())
+				if (username == null || username.isEmpty())
 				{
-					throw new IllegalArgumentException("Missing username parameter on method " + javaMethod);
+					username = DEFAULT_USERNAME;
 				}
 				String[] roles = userAnnotation.roles(); // role may be null/empty
 				authenticateUser(username, roles);
@@ -59,7 +63,7 @@ public class AuthenticationListener implements IInvokedMethodListener
 				grantedAuthorities.add(new GrantedAuthorityImpl(role));
 			}
 		}
-		UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(username, "fakePassword",
+		UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(username, FAKE_PASSWORD,
 			grantedAuthorities);
 		SecurityContextHolder.getContext().setAuthentication(token);
 	}
